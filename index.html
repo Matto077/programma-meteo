@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>LOCALITA: BRESCIA</h1></center>
+    <script>
+        fetch("https://api.open-meteo.com/v1/forecast?latitude=45.5416&longitude=10.2&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m")
+            .then(response => response.json())
+            .then(data => {
+                const temperatura = data.hourly.temperature_2m[0];
+                document.body.innerHTML += `<h1>Temperatura attuale: ${temperatura}°C</h1>`;
+                const velocitavento = data.hourly.wind_speed_10m[0];
+                document.body.innerHTML += `<h2>Velocità del vento: ${velocitavento} m/s</h2>`;
+                const Umidità = data.hourly.relative_humidity_2m[0];
+                document.body.innerHTML += `<h2>Umidità relativa: ${Umidità}%</h2>`;
+            })
+    </script>
+</body>
+</html>
